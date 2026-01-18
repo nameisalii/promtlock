@@ -1,0 +1,508 @@
+import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
+import {
+    Terminal,
+    Cpu,
+    ShieldCheck,
+    Zap,
+    ArrowRight,
+    Code2,
+    Lock,
+    Activity,
+    DollarSign,
+    Clock,
+    FileCode,
+    Bug,
+    Wrench,
+    BookOpen,
+    Layers,
+    Search,
+    Scale,
+    CheckCircle2
+} from 'lucide-react';
+import './LandingPage.css';
+
+const LandingPage = () => {
+    const navigate = useNavigate();
+    const handleLaunch = () => navigate('/app');
+
+    const fadeInUp = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+    };
+
+    const staggerContainer = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1
+            }
+        }
+    };
+
+    return (
+        <div className="landing-page">
+            <div className="landing-bg-top" />
+            <div className="landing-bg-bottom" />
+
+            <nav className="landing-nav">
+                <div className="flex items-center gap-2">
+                    <div className="landing-logo-box">
+                        <Lock className="w-4 h-4 text-white" />
+                    </div>
+                    <span className="font-bold text-lg tracking-tight">BudgetLock</span>
+                </div>
+                <button onClick={handleLaunch} className="btn btn-primary">
+                    Launch Component <ArrowRight className="w-4 h-4" />
+                </button>
+            </nav>
+
+            <header className="landing-hero">
+                <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    variants={staggerContainer}
+                >
+                    <motion.div variants={fadeInUp} className="version-pill">
+                        <span className="pulse-dot" />
+                        V1.0 BETA NOW AVAILABLE
+                    </motion.div>
+
+                    <motion.h1 variants={fadeInUp} className="hero-title">
+                        Stop Guessing. <br />
+                        <span className="text-accent-blue">Start Engineering.</span>
+                    </motion.h1>
+
+                    <motion.p variants={fadeInUp} className="hero-subtitle">
+                        The first professional compiler for LLM prompts. Optimizing token usage,
+                        enforcing strict schemas, and ensuring deterministic outputs.
+                    </motion.p>
+
+                    <motion.div variants={fadeInUp} className="hero-actions">
+                        <button onClick={handleLaunch} className="btn-hero-primary">
+                            Start Optimizing <Zap className="w-4 h-4" />
+                        </button>
+                        <button className="btn-hero-secondary">
+                            <Code2 className="w-4 h-4" /> Read Documentation
+                        </button>
+                    </motion.div>
+                </motion.div>
+            </header>
+
+            <ImpactGraphSection />
+
+            <section className="orchestration-section">
+                <div className="orch-container">
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={staggerContainer}
+                        className="orch-content"
+                    >
+                        <motion.div variants={fadeInUp} className="orch-label">
+                            <Scale className="w-4 h-4" /> Intelligent Arbitration
+                        </motion.div>
+                        <motion.h2 variants={fadeInUp} className="text-4xl font-bold text-primary leading-tight">
+                            You set the budget.<br />
+                            <span className="text-accent-purple">We choose the writer.</span>
+                        </motion.h2>
+                        <motion.p variants={fadeInUp} className="text-secondary text-lg leading-relaxed max-w-md">
+                            Don't overpay for simple tasks. Our evolutionary compiler analyzes your prompt's complexity
+                            and automatically routes it to the most cost-effective model that meets your strict quality threshold.
+                        </motion.p>
+
+                        <motion.div variants={fadeInUp} className="mt-8 flex flex-col gap-4 font-mono text-sm border-l-2 border-[var(--border-subtle)] pl-6">
+                            <div className="flex items-center gap-3 text-secondary">
+                                <span className="w-16 text-xs text-tertiary">HIGH</span>
+                                <span className="text-primary">O1 / Opus</span>
+                            </div>
+                            <div className="flex items-center gap-3 text-secondary">
+                                <span className="w-16 text-xs text-tertiary">MEDIUM</span>
+                                <span className="text-primary">Sonnet / GPT-4o</span>
+                            </div>
+                            <div className="flex items-center gap-3 text-secondary">
+                                <span className="w-16 text-xs text-tertiary">LOW</span>
+                                <span className="text-primary">Haiku / Flash</span>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.8 }}
+                        className="orch-visual-box"
+                    >
+                        <div className="absolute inset-0 bg-[#050505] flex items-center justify-center">
+                            <div className="relative">
+                                <div className="absolute inset-0 bg-accent-blue opacity-20 blur-xl rounded-full animate-pulse-slow"></div>
+                                <Cpu className="w-12 h-12 text-accent-blue relative z-10" />
+
+                                <svg className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 opacity-30 animate-spin-slow" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="4 4" className="text-secondary" />
+                                    <circle cx="50" cy="2" r="2" fill="currentColor" className="text-accent-blue" />
+                                </svg>
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
+            </section>
+
+            <section className="capabilities-section">
+                <div className="cap-header">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <h2 className="text-3xl font-bold text-primary mb-4">Built for Heavy Construction</h2>
+                        <p className="text-secondary max-w-2xl mx-auto">
+                            Your prompts aren't just text. They are software specs.
+                            BudgetLock handles the entire lifecycle.
+                        </p>
+                    </motion.div>
+                </div>
+                <div className="capabilities-grid">
+                    <CapabilityCard
+                        icon={<Layers className="w-5 h-5" />}
+                        title="Big Files Support"
+                        desc="Upload massive context files. We handle chunking, vectorization, and relevance filtering automatically."
+                    />
+                    <CapabilityCard
+                        icon={<FileCode className="w-5 h-5" />}
+                        title="Coding Assistance"
+                        desc="Specialized processing for syntax highlighting and reduced hallucination in generated code."
+                    />
+                    <CapabilityCard
+                        icon={<Bug className="w-5 h-5" />}
+                        title="Deep Debugging"
+                        desc="Analyze stack traces and logs to pinpoint root causes faster than any human observer."
+                    />
+                    <CapabilityCard
+                        icon={<Search className="w-5 h-5" />}
+                        title="Code Review"
+                        desc="Agentic diff review that flags security vulnerabilities and style violations before merge."
+                    />
+                    <CapabilityCard
+                        icon={<Wrench className="w-5 h-5" />}
+                        title="Build & Config"
+                        desc="Fix webpack, vite, and docker configurations by analyzing dependence graphs."
+                    />
+                    <CapabilityCard
+                        icon={<BookOpen className="w-5 h-5" />}
+                        title="Documentation"
+                        desc="Auto-generate JSDoc, Readmes, and API references from your raw source code."
+                    />
+                </div>
+            </section>
+
+            <section className="features-section">
+                <div className="max-w-7xl mx-auto px-6 mb-12 text-center">
+                    <h2 className="text-2xl font-bold text-primary">Core Mechanics</h2>
+                </div>
+                <div className="features-grid">
+                    <FeatureCard
+                        icon={<Terminal className="w-6 h-6 text-accent-purple" />}
+                        title="Semantic Minification"
+                        description="Reduce token count by up to 40% without losing semantic meaning or context."
+                    />
+
+                    <FeatureCard
+                        icon={<Cpu className="w-6 h-6 text-accent-blue" />}
+                        title="Budget Enforcement"
+                        description="Define strict token budgets per section. We ensure you never overflow context windows."
+                    />
+
+                    <FeatureCard
+                        icon={<ShieldCheck className="w-6 h-6 text-accent-emerald" />}
+                        title="Schema Validation"
+                        description="Validate variable injection against strict types before sending a single request."
+                    />
+                </div>
+            </section>
+
+            <section className="demo-section">
+                <div className="demo-container">
+                    <motion.div
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                        className="terminal-mockup"
+                    >
+                        <div className="terminal-bar">
+                            <div className="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50" />
+                            <div className="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50" />
+                            <div className="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50" />
+                            <div className="ml-4 text-xs font-mono text-secondary">budget_lock_cli — v1.0.2</div>
+                        </div>
+
+                        <div className="terminal-content">
+                            <div className="text-secondary mb-2">$ nexhack compile --strict ./prompts/system_v1.md</div>
+                            <div className="text-accent-purple mb-2">➜ Parsing 3 files...</div>
+                            <div className="terminal-grid">
+                                <span className="text-tertiary">Analyzing</span>
+                                <span className="text-primary">system_v1.md (1,240 tokens)</span>
+                            </div>
+                            <div className="terminal-grid">
+                                <span className="text-tertiary">Optimizing</span>
+                                <span className="text-accent-emerald">Removed 320 redundant tokens (Stopwords, Whitespace)</span>
+                            </div>
+                            <div className="terminal-grid mb-4">
+                                <span className="text-tertiary">Result</span>
+                                <span className="text-accent-blue">920 tokens (74% of original)</span>
+                            </div>
+                            <div className="text-accent-emerald">✔ BudgetLock Compilation Successful. Output saved to ./dist/prompt.json</div>
+                            <div className="mt-4 w-4 h-6 bg-accent-blue animate-pulse" />
+                        </div>
+                    </motion.div>
+                </div>
+            </section>
+
+            <footer className="landing-footer">
+                <div className="footer-content">
+                    <div className="flex items-center gap-2">
+                        <div className="w-6 h-6 bg-tertiary rounded-md flex items-center justify-center">
+                            <Lock className="w-3 h-3 text-bg-space" />
+                        </div>
+                        <span className="text-secondary font-medium">BudgetLock Inc.</span>
+                    </div>
+                    <div className="text-tertiary text-sm">
+                        © 2026 BudgetLock. All rights reserved.
+                    </div>
+                </div>
+            </footer>
+        </div>
+    );
+};
+
+// --- Impact Graph with Stepped Lines ---
+
+const ImpactGraphSection = () => {
+    const graphRef = useRef(null);
+    const [mouseProgress, setMouseProgress] = useState(0.5);
+    const [isHovering, setIsHovering] = useState(false);
+
+    const handleMouseMove = (e) => {
+        if (!graphRef.current) return;
+
+        const rect = graphRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const progress = Math.max(0, Math.min(x / rect.width, 1));
+        setMouseProgress(progress);
+    };
+
+    const handleMouseEnter = () => setIsHovering(true);
+    const handleMouseLeave = () => {
+        setIsHovering(false);
+        setMouseProgress(0.5); // Reset to middle
+    };
+
+    const savings = Math.round(mouseProgress * 40);
+    const speed = (1 + mouseProgress * 1.5).toFixed(1);
+    const determinism = Math.round(mouseProgress * 100);
+
+    return (
+        <section className="impact-section">
+            <div className="impact-container">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true }}
+                    className="impact-header"
+                >
+                    <h2 className="impact-title">Measure Your Velocity</h2>
+                    <p className="impact-sub">
+                        Move your cursor left to right to see the optimization impact.
+                    </p>
+                </motion.div>
+
+                <div className="impact-graph-container">
+                    <div
+                        ref={graphRef}
+                        className="graph-wrapper"
+                        onMouseMove={handleMouseMove}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                    >
+                        <svg className="graph-svg" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid meet">
+                            <defs>
+                                <linearGradient id="unoptGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stopColor="#D97706" stopOpacity="0.4" />
+                                    <stop offset="100%" stopColor="#D97706" stopOpacity="1" />
+                                </linearGradient>
+                                <linearGradient id="optimGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stopColor="#10B981" stopOpacity="0.4" />
+                                    <stop offset="100%" stopColor="#10B981" stopOpacity="1" />
+                                </linearGradient>
+                            </defs>
+
+                            {/* Unoptimized stepped line (orange) */}
+                            <motion.path
+                                d="M 50 320 L 150 320 L 150 300 L 250 300 L 250 290 L 350 290 L 350 275 L 450 275 L 450 260 L 550 260 L 550 250 L 650 250 L 650 240 L 750 240 L 750 230 L 900 230"
+                                fill="none"
+                                stroke="url(#unoptGrad)"
+                                strokeWidth="3"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                initial={{ pathLength: 0, opacity: 0 }}
+                                animate={{ pathLength: 1, opacity: 0.7 }}
+                                transition={{ duration: 2, ease: "easeInOut" }}
+                            />
+
+                            <motion.circle
+                                cx="900"
+                                cy="230"
+                                r="5"
+                                fill="#D97706"
+                                initial={{ scale: 0, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                transition={{ delay: 2, duration: 0.2 }}
+                            />
+
+                            {/* Optimized stepped line (green) */}
+                            <motion.path
+                                d="M 50 340 L 150 340 L 150 280 L 250 280 L 250 220 L 350 220 L 350 160 L 450 160 L 450 120 L 550 120 L 550 90 L 650 90 L 650 65 L 750 65 L 750 45 L 900 45"
+                                fill="none"
+                                stroke="url(#optimGrad)"
+                                strokeWidth="3"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                initial={{ pathLength: 0, opacity: 0 }}
+                                animate={{
+                                    pathLength: mouseProgress,
+                                    opacity: isHovering ? 1 : 0.5
+                                }}
+                                transition={{ duration: 0.8, ease: "easeOut" }}
+                            />
+
+                            <motion.circle
+                                cx={50 + (850 * mouseProgress)}
+                                cy={340 - (295 * mouseProgress)}
+                                r="6"
+                                fill="#10B981"
+                                initial={{ scale: 0, opacity: 0 }}
+                                animate={{
+                                    scale: mouseProgress > 0.05 ? 1 : 0,
+                                    opacity: mouseProgress > 0.05 ? 1 : 0
+                                }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                <animate
+                                    attributeName="r"
+                                    values="6;8;6"
+                                    dur="2s"
+                                    repeatCount="indefinite"
+                                />
+                            </motion.circle>
+
+                            <text x="820" y="220" fill="#D97706" fontSize="11" fontFamily="monospace" opacity="0.9">
+                                UNOPTIMIZED
+                            </text>
+
+                            <motion.text
+                                x="820"
+                                y="35"
+                                fill="#10B981"
+                                fontSize="11"
+                                fontFamily="monospace"
+                                animate={{ opacity: mouseProgress > 0.5 ? 1 : 0.3 }}
+                            >
+                                BUDGETLOCK
+                            </motion.text>
+                        </svg>
+                    </div>
+
+                    <div className="stats-grid">
+                        <AnimatedStatCard
+                            icon={<DollarSign className="w-5 h-5" />}
+                            label="Token Savings"
+                            value={`${savings}%`}
+                            color="emerald"
+                            delay={0}
+                        />
+                        <AnimatedStatCard
+                            icon={<Clock className="w-5 h-5" />}
+                            label="Faster Iteration"
+                            value={`${speed}x`}
+                            color="blue"
+                            delay={0.1}
+                        />
+                        <AnimatedStatCard
+                            icon={<Activity className="w-5 h-5" />}
+                            label="Deterministic"
+                            value={`${determinism}%`}
+                            color="purple"
+                            delay={0.2}
+                        />
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+const AnimatedStatCard = ({ icon, label, value, color, delay }) => {
+    const colors = {
+        emerald: 'border-emerald-500/30 bg-emerald-500/5 text-emerald-400',
+        blue: 'border-blue-500/30 bg-blue-500/5 text-blue-400',
+        purple: 'border-purple-500/30 bg-purple-500/5 text-purple-400'
+    };
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay, duration: 0.5 }}
+            className={`stat-card ${colors[color]}`}
+        >
+            <div className="stat-icon">{icon}</div>
+            <div className="stat-value">{value}</div>
+            <div className="stat-label">{label}</div>
+        </motion.div>
+    );
+};
+
+const FeatureCard = ({ icon, title, description }) => (
+    <motion.div
+        variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0 }
+        }}
+        viewport={{ once: true }}
+        className="feature-card group"
+    >
+        <div className="feature-icon-box group-hover:scale-110">
+            {icon}
+        </div>
+        <h3 className="feature-title">{title}</h3>
+        <p className="feature-desc">
+            {description}
+        </p>
+    </motion.div>
+);
+
+const CapabilityCard = ({ icon, title, desc }) => (
+    <motion.div
+        variants={{
+            hidden: { opacity: 0, scale: 0.95 },
+            visible: { opacity: 1, scale: 1 }
+        }}
+        viewport={{ once: true }}
+        className="cap-card"
+    >
+        <div className="cap-icon">
+            {icon}
+        </div>
+        <div>
+            <h4 className="cap-title">{title}</h4>
+            <p className="cap-desc mt-2">{desc}</p>
+        </div>
+    </motion.div>
+);
+
+export default LandingPage;
