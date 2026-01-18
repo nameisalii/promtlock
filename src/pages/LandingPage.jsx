@@ -95,6 +95,44 @@ const LandingPage = () => {
                 </motion.div>
             </header>
 
+            {/* Trusted By Section - Logos */}
+            {/* Trusted By Section - Logos */}
+            {/* Trusted By Section - Logos (3 Bigger Logos) */}
+            <motion.section
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8, duration: 1 }}
+                className="trusted-by-section"
+            >
+                <div className="logos-container" style={{ gap: '6rem' }}>
+                    {/* The Token Company - BIGGER */}
+                    <div className="partner-logo" title="The Token Company" style={{ transform: 'scale(1.2)' }}>
+                        <svg viewBox="0 0 240 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <text x="120" y="28" fill="#FFFFFF" fontFamily="sans-serif" fontWeight="bold" fontSize="22" textAnchor="middle">The Token Company</text>
+                        </svg>
+                    </div>
+
+                    {/* Arize - BIGGER */}
+                    <div className="partner-logo" title="Arize AI" style={{ transform: 'scale(1.5)' }}>
+                        <svg viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '120px' }}>
+                            <path d="M10 30L20 10L30 30H25L20 20L15 30H10Z" fill="#A855F7" />
+                            <text x="35" y="28" fill="#A855F7" fontFamily="sans-serif" fontWeight="bold" fontSize="22">arize</text>
+                        </svg>
+                    </div>
+
+                    {/* LeanMCP - BIGGER */}
+                    <div className="partner-logo" title="LeanMCP" style={{ transform: 'scale(1.2)' }}>
+                        <svg viewBox="0 0 160 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="5" y="5" width="30" height="30" rx="6" fill="#E5E5E5" />
+                            <path d="M14 15V25" stroke="#111" strokeWidth="3" strokeLinecap="round" />
+                            <path d="M20 18V25" stroke="#111" strokeWidth="3" strokeLinecap="round" />
+                            <path d="M26 15V25" stroke="#111" strokeWidth="3" strokeLinecap="round" />
+                            <text x="45" y="28" fill="#FFFFFF" fontFamily="sans-serif" fontWeight="bold" fontSize="22">LeanMCP</text>
+                        </svg>
+                    </div>
+                </div>
+            </motion.section>
+
             <ImpactGraphSection />
 
             {/* Integration Cards */}
@@ -140,9 +178,9 @@ const LandingPage = () => {
 
             {/* Built for Heavy Construction Section */}
             <section className="features-section">
-                <div className="max-w-7xl mx-auto px-6 mb-12 text-center">
-                    <h2 className="text-3xl font-bold text-primary mb-4">Built for Heavy Construction</h2>
-                    <p className="text-secondary text-lg max-w-2xl mx-auto">
+                <div className="section-header">
+                    <h2 className="section-title">Built for Heavy Construction</h2>
+                    <p className="section-subtitle">
                         Your prompts aren't just text. They are software specs. BudgetLock handles the entire lifecycle.
                     </p>
                 </div>
@@ -151,37 +189,37 @@ const LandingPage = () => {
                         icon={<Layers className="w-6 h-6" />}
                         title="Big Files Support"
                         description="Upload massive context files. We handle chunking, vectorization, and relevance filtering automatically."
-                        color="none"
+                        color="blue"
                     />
                     <FeatureCard
                         icon={<FileCode className="w-6 h-6" />}
                         title="Coding Assistance"
                         description="Specialized processing for syntax highlighting and reduced hallucination in generated code."
-                        color="blue"
+                        color="purple"
                     />
                     <FeatureCard
                         icon={<Bug className="w-6 h-6" />}
                         title="Deep Debugging"
                         description="Analyze stack traces and logs to pinpoint root causes faster than any human observer."
-                        color="none"
+                        color="rose"
                     />
                     <FeatureCard
                         icon={<Search className="w-6 h-6" />}
                         title="Code Review"
                         description="Agentic diff review that flags security vulnerabilities and style violations before merge."
-                        color="none"
+                        color="emerald"
                     />
                     <FeatureCard
                         icon={<Wrench className="w-6 h-6" />}
                         title="Build & Config"
                         description="Fix webpack, vite, and docker configurations by analyzing dependence graphs."
-                        color="none"
+                        color="amber"
                     />
                     <FeatureCard
                         icon={<BookOpen className="w-6 h-6" />}
                         title="Documentation"
                         description="Auto-generate JSDoc, Readmes, and API references from your raw source code."
-                        color="none"
+                        color="cyan"
                     />
                 </div>
             </section>
@@ -236,6 +274,8 @@ const ImpactGraphSection = () => {
 
     const savings = isLocked ? 40 : Math.round(mouseProgress * 40);
     const speed = isLocked ? "2.5" : (1 + mouseProgress * 1.5).toFixed(1);
+    const determinism = isLocked ? 100 : Math.round(mouseProgress * 100);
+    const accuracy = isLocked ? 99 : Math.round(50 + mouseProgress * 49);
 
     return (
         <section className="impact-section">
@@ -244,10 +284,10 @@ const ImpactGraphSection = () => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="impact-header"
+                    className="section-header"
                 >
-                    <h2 className="impact-title">Measure Your Velocity</h2>
-                    <p className="impact-sub">
+                    <h2 className="section-title">Measure Your Velocity</h2>
+                    <p className="section-subtitle">
                         {isLocked ? "Optimization Complete." : "Move your cursor to optimize."}
                     </p>
                 </motion.div>
@@ -291,7 +331,7 @@ const ImpactGraphSection = () => {
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}
                     >
-                        {/* Stats Overlay - Under Graph Lines */}
+                        {/* Stats Overlay - 4 Cards Under Graph Lines */}
                         <div className="graph-overlay-stats">
                             <div className="overlay-stat-card">
                                 <span className="overlay-stat-value text-emerald-400">{savings}%</span>
@@ -300,6 +340,10 @@ const ImpactGraphSection = () => {
                             <div className="overlay-stat-card">
                                 <span className="overlay-stat-value text-blue-400">{speed}x</span>
                                 <span className="overlay-stat-label">Faster</span>
+                            </div>
+                            <div className="overlay-stat-card">
+                                <span className="overlay-stat-value text-purple-400">{determinism}%</span>
+                                <span className="overlay-stat-label">Determinism</span>
                             </div>
                         </div>
 
@@ -397,10 +441,10 @@ const TracingSection = () => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-12"
+                    className="section-header"
                 >
-                    <h2 className="text-3xl font-bold text-primary mb-4">Built-in observability</h2>
-                    <p className="text-secondary text-lg">View traces and logs for your agents</p>
+                    <h2 className="section-title">Built-in observability</h2>
+                    <p className="section-subtitle">View traces and logs for your agents</p>
                 </motion.div>
 
                 <div className="trace-container">
@@ -413,12 +457,12 @@ const TracingSection = () => {
                             viewport={{ once: true }}
                             className="trace-item"
                         >
-                            <div className="trace-info flex-1">
+                            <div className="trace-info">
                                 {i === 0 && <CheckCircle2 className="w-4 h-4 text-white" />}
                                 {i > 0 && <ChevronDown className="w-4 h-4 text-secondary opacity-0" />}
                                 <span className="trace-name">{trace.name}</span>
                             </div>
-                            <div className="trace-bar-container w-2/3 flex items-center justify-end gap-4">
+                            <div className="trace-bar-container">
                                 <motion.div
                                     className="trace-bar"
                                     initial={{ width: 0 }}
@@ -426,9 +470,8 @@ const TracingSection = () => {
                                     transition={{ delay: i * 0.1 + 0.2, duration: 0.8, ease: "easeOut" }}
                                     viewport={{ once: true }}
                                 />
-                                {/* Time is now white via CSS .trace-time */}
-                                <span className="trace-time">{trace.time}</span>
                             </div>
+                            <span className="trace-time">{trace.time}</span>
                         </motion.div>
                     ))}
                 </div>
